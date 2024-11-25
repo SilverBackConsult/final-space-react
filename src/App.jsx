@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import config from '../firebase.config'
+import { getDatabase, ref, onValue } from 'firebase/database'
 import './App.css'
 
 import Header from './components/Header'
@@ -20,6 +22,12 @@ function App() {
   }
 
   useEffect(() => {
+
+    // initialize the firebase database with provided configuration
+    const database = getDatabase(config)
+
+    const collectionRef = ref(database, "characters");
+
     fetchItems();
   }, [])
 
